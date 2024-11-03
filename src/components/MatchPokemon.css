@@ -1,0 +1,26 @@
+.pokemon {
+    width:35%;
+}
+
+.pokemon_art {
+    height: 350px;
+    width: 350px;
+}
+
+.pokemon_name {
+    font-size: larger;
+}
+
+.pokemon_genus {
+    font-size: large;
+}
+
+.pokemon_flavor {
+    font-size: medium;
+}
+.pokemon_generation {
+    font-size: medium;
+}
+.pokemon_types {
+    font-size: large;
+}

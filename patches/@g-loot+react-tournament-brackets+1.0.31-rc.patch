@@ -1,0 +1,25 @@
+diff --git a/node_modules/@g-loot/react-tournament-brackets/dist/cjs/bracket-single/single-elim-bracket.js b/node_modules/@g-loot/react-tournament-brackets/dist/cjs/bracket-single/single-elim-bracket.js
+index dc91ede..d3167d1 100644
+--- a/node_modules/@g-loot/react-tournament-brackets/dist/cjs/bracket-single/single-elim-bracket.js
++++ b/node_modules/@g-loot/react-tournament-brackets/dist/cjs/bracket-single/single-elim-bracket.js
+@@ -17,7 +17,7 @@ const connectors_1 = __importDefault(require("./connectors"));
+ const themes_1 = __importDefault(require("../themes/themes"));
+ const SingleEliminationBracket = ({ matches, matchComponent, currentRound, onMatchClick, onPartyClick, svgWrapper: SvgWrapper = ({ children }) => (0, jsx_runtime_1.jsx)("div", { children: children }), theme = themes_1.default, options: { style: inputStyle } = {
+     style: settings_1.defaultStyle,
+-}, }) => {
++},preRoundPresent}) => {
+     var _a, _b;
+     const style = Object.assign(Object.assign(Object.assign({}, settings_1.defaultStyle), inputStyle), { roundHeader: Object.assign(Object.assign({}, settings_1.defaultStyle.roundHeader), ((_a = inputStyle === null || inputStyle === void 0 ? void 0 : inputStyle.roundHeader) !== null && _a !== void 0 ? _a : {})), lineInfo: Object.assign(Object.assign({}, settings_1.defaultStyle.lineInfo), ((_b = inputStyle === null || inputStyle === void 0 ? void 0 : inputStyle.lineInfo) !== null && _b !== void 0 ? _b : {})) });
+     const { roundHeader, columnWidth, canvasPadding, rowHeight, width } = (0, settings_1.getCalculatedStyles)(style);
+@@ -42,7 +42,10 @@ const SingleEliminationBracket = ({ matches, matchComponent, currentRound, onMat
+             : [];
+     };
+     const columns = generate2DBracketArray(lastGame);
+-    const { gameWidth, gameHeight, startPosition } = (0, calculate_svg_dimensions_1.calculateSVGDimensions)(columns[0].length, columns.length, rowHeight, columnWidth, canvasPadding, roundHeader, currentRound);
++    const numRows = preRoundPresent ? columns[1].length : columns[0].length;
++    console.log(numRows);
++    console.log(preRoundPresent);
++    const { gameWidth, gameHeight, startPosition } = (0, calculate_svg_dimensions_1.calculateSVGDimensions)(numRows, columns.length, rowHeight, columnWidth, canvasPadding, roundHeader, currentRound);
+     return ((0, jsx_runtime_1.jsx)(styled_components_1.ThemeProvider, Object.assign({ theme: theme }, { children: (0, jsx_runtime_1.jsx)(SvgWrapper, Object.assign({ bracketWidth: gameWidth, bracketHeight: gameHeight, startAt: startPosition }, { children: (0, jsx_runtime_1.jsx)("svg", Object.assign({ height: gameHeight, width: gameWidth, viewBox: `0 0 ${gameWidth} ${gameHeight}` }, { children: (0, jsx_runtime_1.jsx)(match_context_1.MatchContextProvider, { children: (0, jsx_runtime_1.jsx)("g", { children: columns.map((matchesColumn, columnIndex) => matchesColumn.map((match, rowIndex) => {
+                             const { x, y } = (0, calculate_match_position_1.calculatePositionOfMatch)(rowIndex, columnIndex, {
+                                 canvasPadding,
